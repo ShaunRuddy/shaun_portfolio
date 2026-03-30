@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaun Ruddy — Engineering Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #0c1a2e;
+    --navy-mid:    #112240;
+    --navy-light:  #1a3455;
+    --steel:       #2b4162;
+    --grey-dark:   #1c2535;
+    --grey-mid:    #3d4f62;
+    --grey-light:  #7a8ea0;
+    --grey-pale:   #b0c0d0;
+    --white:       #e6eff8;
+    --teal:        #38b2ac;
+    --teal-dim:    #1f7a76;
+    --gold:        #c9974a;
+    --gold-dim:    #8c6530;
+    --sage:        #6b9e8a;
+    --sage-dim:    #3e6b59;
+    --warm:        #e2c99a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1000; opacity: 0.35;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 4rem;
+    background: rgba(12,26,46,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(56,178,172,0.12);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 3px; color: var(--teal);
+  }
+  .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+  .nav-links a {
+    display: inline-block;
+    padding: 0.45rem 1.1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    color: var(--grey-pale);
+    text-decoration: none;
+    font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+    transition: all 0.2s; background: transparent;
+  }
+  .nav-links a:hover {
+    border-color: var(--teal); color: var(--teal);
+    background: rgba(56,178,172,0.07);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 7rem 4rem 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 55% at 85% 40%, rgba(56,178,172,0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 15% 70%, rgba(201,151,74,0.04) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(56,178,172,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,178,172,0.035) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 25%, transparent 70%);
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    max-width: 1100px; width: 100%;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 4px;
+    color: var(--teal); text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--teal);
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+    line-height: 0.9; letter-spacing: 2px; color: var(--white);
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  h1 span { color: var(--teal); display: block; }
+  .hero-sub {
+    margin-top: 1.8rem; font-size: 1rem; color: var(--grey-pale);
+    max-width: 520px; line-height: 1.75;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-sub strong { color: var(--warm); font-weight: 500; }
+  .hero-cta {
+    margin-top: 2rem; display: flex; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; text-decoration: none;
+    transition: all 0.25s; cursor: pointer; border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary { background: var(--teal); color: var(--navy); }
+  .btn-primary:hover {
+    background: var(--warm); transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(56,178,172,0.25);
+  }
+  .btn-outline { background: transparent; color: var(--grey-pale); border: 1px solid rgba(255,255,255,0.18); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  /* ── HERO STAT CARDS ── */
+  .hero-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 2.8rem;
+    opacity: 0; animation: fadeUp 0.8s 1s forwards;
+    max-width: 860px;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 1.8rem 1.6rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .hero-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+  }
+  .hero-card.card-edu::before  { background: var(--teal); }
+  .hero-card.card-exp::before  { background: var(--gold); }
+  .hero-card.card-role::before { background: var(--sage); }
+  .hero-card:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.15); }
+  .hc-icon { font-size: 1.4rem; margin-bottom: 0.8rem; display: block; }
+  .hc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .card-edu  .hc-label { color: var(--teal); }
+  .card-exp  .hc-label { color: var(--gold); }
+  .card-role .hc-label { color: var(--sage); }
+  .hc-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 1px; color: var(--white);
+    line-height: 1.1; margin-bottom: 0.5rem;
+  }
+  .hc-detail { font-size: 0.76rem; color: var(--grey-light); line-height: 1.55; }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 4rem; position: relative; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 4px; color: var(--teal);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;
+  }
+  .section-label::after { content: ''; flex: 1; max-width: 55px; height: 1px; background: var(--teal); }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px; line-height: 1;
+    margin-bottom: 3rem; color: var(--white);
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--navy-mid); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start; max-width: 1200px; margin: 0 auto;
+  }
+  .about-text p { color: var(--grey-pale); margin-bottom: 1.2rem; font-size: 0.97rem; line-height: 1.8; }
+  .about-text p strong { color: var(--warm); font-weight: 500; }
+  .edu-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .edu-card {
+    background: rgba(56,178,172,0.04); border: 1px solid rgba(56,178,172,0.12);
+    border-left: 3px solid var(--teal); padding: 1.4rem; transition: background 0.2s;
+  }
+  .edu-card:hover { background: rgba(56,178,172,0.08); }
+  .edu-degree { font-size: 0.7rem; font-family: 'DM Mono', monospace; color: var(--teal); letter-spacing: 1px; margin-bottom: 0.3rem; }
+  .edu-title { font-weight: 500; color: var(--white); font-size: 0.93rem; }
+  .edu-school { color: var(--grey-light); font-size: 0.82rem; margin-top: 0.2rem; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy); }
+  .skills-container { max-width: 1200px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px,1fr)); gap: 1.4rem; }
+  .skill-group {
+    background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.06);
+    padding: 1.8rem; transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-group:hover { border-color: rgba(56,178,172,0.22); transform: translateY(-3px); }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .tag {
+    display: inline-block; padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(255,255,255,0.09);
+    font-size: 0.76rem; color: var(--grey-pale); font-family: 'DM Mono', monospace;
+    transition: all 0.2s;
+  }
+  .tag:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--navy-mid); }
+  .exp-container { max-width: 900px; margin: 0 auto; }
+  .exp-item {
+    display: grid; grid-template-columns: 175px 1fr;
+    gap: 3rem; margin-bottom: 3.5rem; padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { text-align: right; }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 0.4rem; }
+  .exp-company { font-size: 0.83rem; color: var(--grey-light); }
+  .exp-role { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 1rem; color: var(--white); }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-bullets li { color: var(--grey-pale); font-size: 0.88rem; line-height: 1.65; padding-left: 1.2rem; position: relative; }
+  .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--sage); font-size: 0.68rem; top: 0.22rem; }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--navy); }
+  .projects-container { max-width: 1300px; margin: 0 auto; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px,1fr)); gap: 1.4rem; }
+  .project-card {
+    background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(56,178,172,0.28); box-shadow: 0 20px 55px rgba(0,0,0,0.38); }
+  .project-img-placeholder {
+    width: 100%; height: 190px;
+    background: linear-gradient(135deg, var(--navy-light) 0%, var(--steel) 100%);
+    display: flex; align-items: center; justify-content: center; font-size: 2.8rem;
+  }
+  .project-body { padding: 1.7rem; }
+  .project-tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.75rem; }
+  .project-desc { color: var(--grey-pale); font-size: 0.86rem; line-height: 1.65; margin-bottom: 1rem; }
+  .project-result { background: rgba(56,178,172,0.05); border-left: 2px solid var(--teal); padding: 0.55rem 0.85rem; font-size: 0.78rem; color: var(--grey-pale); font-style: italic; }
+  .project-card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .project-card.wide .project-img-placeholder { height: 100%; min-height: 220px; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--navy-mid); text-align: center; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-inner p { color: var(--grey-pale); margin-bottom: 2.5rem; font-size: 0.97rem; line-height: 1.75; }
+  .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.8rem 1.6rem; border: 1px solid rgba(255,255,255,0.12);
+    color: var(--grey-pale); text-decoration: none;
+    font-size: 0.8rem; font-family: 'DM Mono', monospace; letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,151,74,0.05); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px; color: var(--grey-light); }
+  .footer-copy { font-size: 0.72rem; color: var(--grey-mid); font-family: 'DM Mono', monospace; }
+
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(56,178,172,0.18), transparent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 850px) {
+    nav { padding: 1rem 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding: 6rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-meta { text-align: left; }
+    .hero-cards { grid-template-columns: 1fr; }
+    .project-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
+    .project-card.wide .project-img-placeholder { height: 190px; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .nav-links { gap: 0.3rem; }
+    .nav-links a { padding: 0.4rem 0.7rem; font-size: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SR</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Mechatronics · Robotics · AI</div>
+    <h1>Shaun<span>Ruddy</span></h1>
+    <p class="hero-sub">Multidisciplinary engineer bridging <strong>mechanical design</strong>, <strong>embedded systems</strong>, and <strong>machine learning</strong> — building the next generation of intelligent robotic systems.</p>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+
+    <div class="hero-cards">
+      <div class="hero-card card-edu">
+        <span class="hc-icon">🎓</span>
+        <div class="hc-label">Education</div>
+        <div class="hc-value">3 Degrees</div>
+        <div class="hc-detail">
+          M.Eng. Robotics &amp; AI — University of Toronto<br>
+          B.Eng. Mechanical Engineering — University of Ottawa<br>
+          BSc. Computing Technology — University of Ottawa
+        </div>
+      </div>
+      <div class="hero-card card-exp">
+        <span class="hc-icon">💼</span>
+        <div class="hc-label">Work Experience</div>
+        <div class="hc-value">5+ Years</div>
+        <div class="hc-detail">
+          Robotics Perception Eng. — aRobotics (2025–Present)<br>
+          Additive Mfg. Intern — Equispheres (2023)<br>
+          Mechanical Intern — ICOR Technology (2019)
+        </div>
+      </div>
+      <div class="hero-card card-role">
+        <span class="hc-icon">🤖</span>
+        <div class="hc-label">Current Title</div>
+        <div class="hc-value">Robotics Perception Engineer</div>
+        <div class="hc-detail">
+          aRobotics Company · Ossining, NY<br>
+          Multi-sensor pipelines · Embedded perception<br>
+          NVIDIA Jetson Orin Nano
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">About</div>
+      <h2>Engineer by Training,<br>Builder by Nature</h2>
+      <p>I hold a <strong>Master of Engineering in Robotics &amp; AI</strong> from the University of Toronto, alongside dual Bachelor's degrees in <strong>Mechanical Engineering</strong> and <strong>Computing Technology</strong> from the University of Ottawa.</p>
+      <p>Currently working as a <strong>Robotics Perception Engineer</strong> in Ossining, NY, I specialize in deploying multi-sensor software pipelines on embedded platforms like the NVIDIA Jetson Orin Nano, developing infrared processing algorithms, and pursuing SLAM and reinforcement learning research.</p>
+      <p>I've also developed a <strong>novel non-destructive testing system</strong> capable of detecting micron-scale fatigue cracks — work that has attracted interest from the U.S. Air Force.</p>
+      <p>Outside the lab, I've captained a competitive ultimate frisbee team to a provincial championship and was a provincial robotics tournament finalist.</p>
+    </div>
+    <div class="edu-cards reveal">
+      <div class="section-label">Education</div>
+      <div class="edu-card">
+        <div class="edu-degree">M.Eng. · 2024–2025</div>
+        <div class="edu-title">Robotics and Artificial Intelligence</div>
+        <div class="edu-school">University of Toronto</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">B.Eng. · 2017–2023</div>
+        <div class="edu-title">Mechanical Engineering</div>
+        <div class="edu-school">University of Ottawa</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">BSc. · 2017–2023</div>
+        <div class="edu-title">Computing Technology</div>
+        <div class="edu-school">University of Ottawa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-container">
+    <div class="section-label">Capabilities</div>
+    <h2>Skills &amp; Tools</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages &amp; Frameworks</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span><span class="tag">C++</span>
+          <span class="tag">Java</span><span class="tag">ROS2</span><span class="tag">OOP</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Machine Learning &amp; AI</div>
+        <div class="skill-tags">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span>
+          <span class="tag">Scikit-learn</span><span class="tag">CNNs</span><span class="tag">GANs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Perception &amp; Control</div>
+        <div class="skill-tags">
+          <span class="tag">Computer Vision</span><span class="tag">Homography</span>
+          <span class="tag">Stereo Vision</span><span class="tag">SLAM</span><span class="tag">Motion Planning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Embedded &amp; Hardware</div>
+        <div class="skill-tags">
+          <span class="tag">NVIDIA Jetson</span><span class="tag">CAN</span>
+          <span class="tag">SPI</span><span class="tag">I2C</span><span class="tag">Embedded Linux</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">CAD &amp; Design</div>
+        <div class="skill-tags">
+          <span class="tag">SolidWorks</span><span class="tag">Fusion 360</span>
+          <span class="tag">DraftSight</span><span class="tag">FEA</span><span class="tag">DFAM</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Fabrication &amp; Analysis</div>
+        <div class="skill-tags">
+          <span class="tag">3D Printing</span><span class="tag">CNC Machining</span>
+          <span class="tag">MATLAB</span><span class="tag">Topology Opt.</span><span class="tag">Soldering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="exp-container">
+    <div class="section-label">Career</div>
+    <h2>Professional Experience</h2>
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Sept 2025 – Present</div>
+        <div class="exp-company">aRobotics Company<br>Ossining, NY</div>
+      </div>
+      <div>
+        <div class="exp-role">Robotics Perception Engineer</div>
+        <ul class="exp-bullets">
+          <li>Deployed multi-sensor software pipeline on NVIDIA Jetson Orin Nano, designing embedded communication structure (CAN, SPI, I2C) and integrating low-level firmware in Python and C++.</li>
+          <li>Developed performance-critical infrared processing algorithms including flat-field correction and advanced noise mitigation.</li>
+          <li>Pursuing SLAM and Isaac Sim / Isaac Lab reinforcement learning policy training.</li>
+          <li>Developed a novel non-destructive testing system capable of detecting micron-scale fatigue cracks — attracting interest from the U.S. Air Force.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">May 2023 – Nov 2023</div>
+        <div class="exp-company">Equispheres<br>Ottawa, ON</div>
+      </div>
+      <div>
+        <div class="exp-role">Additive Manufacturing Engineering Intern</div>
+        <ul class="exp-bullets">
+          <li>Designed and fabricated aerospace-grade components adhering to industry standards and DFAM process.</li>
+          <li>Conducted research on powder quality, analyzing printing density outcomes based on laser speed, power, and hatch distance.</li>
+          <li>Leveraged data analytics techniques to enhance marketing and sales decision making.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Apr 2019 – Aug 2019</div>
+        <div class="exp-company">ICOR Technology<br>Ottawa, ON</div>
+      </div>
+      <div>
+        <div class="exp-role">Mechanical Engineering Intern</div>
+        <ul class="exp-bullets">
+          <li>Engineered parts, assemblies, and drawings in SolidWorks following the DFA process.</li>
+          <li>Designed a new protective transportation system for electrical components.</li>
+          <li>Identified software-related issues and suggested structured repair steps.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-container">
+    <div class="section-label">Portfolio</div>
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card wide reveal">
+        <div class="project-img-placeholder" style="background:linear-gradient(135deg,#0d2137 0%,#1a3455 100%);font-size:0.9rem;color:var(--grey-pale);letter-spacing:1px;flex-direction:column;gap:0.6rem;">
+          <span style="font-size:3rem">🚁</span>ELECTRIC UAV — CAPSTONE
+        </div>
+        <div class="project-body">
+          <div class="project-tag">Capstone · Mechanical Design · FEA</div>
+          <div class="project-title">Electric UAV for Surveillance</div>
+          <p class="project-desc">Team lead for the design of a fully electric UAV for image collection and surveillance. Responsible for all stress, strain, and fluid analysis, plus the planetary gearbox drivetrain and power unit.</p>
+          <p class="project-desc"><strong style="color:var(--warm)">Design Constraints:</strong> &lt;25kg total mass · 2kg payload · 15,000 ft altitude · 45 km/h wind resistance · 75 km/h top speed · 1-hour flight time.</p>
+          <div class="project-result">Result: Grade A+ · Planetary gearbox capable of 2× the maximum UAV lift force.</div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-img-placeholder">🖼️</div>
+        <div class="project-body">
+          <div class="project-tag">Computer Vision · Python</div>
+          <div class="project-title">Homography Mapping</div>
+          <p class="project-desc">Replaced a CN Tower billboard with the Soldiers' Tower image while maintaining full perspective accuracy. Computed the homography matrix and performed inverse homography warping.</p>
+          <div class="project-result">Result: Successfully maintained perspective with zero distortion artifacts.</div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-img-placeholder">📷</div>
+        <div class="project-body">
+          <div class="project-tag">Computer Vision · Depth Estimation</div>
+          <div class="project-title">Stereo Vision Depth Estimation</div>
+          <p class="project-desc">Depth estimation from pixel coordinates of two offset cameras. Calculated row-wise disparity between pixel kernels and output depth on a colour scale using the inverse disparity relationship.</p>
+          <div class="project-result">Valid pixels: 133,346 · RMS Error: 4.17 · Bad pixel rate: 0.10%</div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-img-placeholder">🤖</div>
+        <div class="project-body">
+          <div class="project-tag">Robotics · Motion Planning</div>
+          <div class="project-title">RRT &amp; RRT* Motion Planning</div>
+          <p class="project-desc">Developed both RRT and RRT* algorithms for robot motion planning in obstacle-rich workspaces. Visualized explored paths, obstacles, and optimal routes through workspace graphs.</p>
+          <div class="project-result">Result: Successful paths found on all attempts in under 200 iterations.</div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-img-placeholder">🎨</div>
+        <div class="project-body">
+          <div class="project-tag">Deep Learning · GAN · PyTorch</div>
+          <div class="project-title">GAN Image Colourization</div>
+          <p class="project-desc">Constructed a Generative Adversarial Network to colourize greyscale images. Used an autoencoder generator with a discriminator to distinguish true from AI-colourized images.</p>
+          <div class="project-result">Result: High-quality colourization with low adversarial loss.</div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-img-placeholder">⚗️</div>
+        <div class="project-body">
+          <div class="project-tag">M.Eng. Project · Systems Engineering</div>
+          <div class="project-title">CO₂ Electrolyzer Feed System</div>
+          <p class="project-desc">Engineered a continuous material handling system for precise KHCO₃ solution delivery into a CO₂ electrolyzer, enabling sustainable carbon capture research.</p>
+          <div class="project-result">Result: Stable, continuous-flow system supporting active electrolyzer operation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center">Contact</div>
+    <h2>Let's Build Something</h2>
+    <p>I'm always open to interesting engineering challenges — robotics, embedded systems, machine learning, or mechanical design. Feel free to reach out.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:srudd987@gmail.com" class="contact-link">✉ srudd987@gmail.com</a>
+      <a href="tel:6138051589" class="contact-link">📞 (613) 805-1589</a>
+      <a href="https://www.linkedin.com/in/shaun-ruddy-02a656178" target="_blank" class="contact-link">in LinkedIn</a>
+    </div>
+    <p style="font-size:0.78rem;color:var(--grey-mid)">Based in Ottawa, ON · Open to opportunities in robotics, mechatronics &amp; AI</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Shaun Ruddy</div>
+  <div class="footer-copy">MEng · BEng · BSc · Robotics Perception Engineer</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 75);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.skills-grid, .projects-grid, .edu-cards').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.07}s`;
+    });
+  });
+</script>
+</body>
+</html>
