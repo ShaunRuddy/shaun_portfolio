@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "pageTitle": "Shaun Ruddy — Engineering Portfolio",
+    "name": "Shaun Ruddy",
+    "initials": "SR",
+    "tagline": "Multidisciplinary engineer bridging mechanical design, embedded systems, and machine learning — building the next generation of intelligent robotic systems."
+  },
+  "navigation": [
+    { "label": "About", "href": "#about" },
+    { "label": "Skills", "href": "#skills" },
+    { "label": "Experience", "href": "#experience" },
+    { "label": "Projects", "href": "#projects" },
+    { "label": "Contact", "href": "#contact" },
+    {
+      "label": "Portfolio",
+      "href": "assets/Shaun Ruddy Engineering Portfolio.pdf"
+    }
+  ],
+  "hero": {
+    "eyebrow": "Mechatronics · Robotics · AI",
+    "headline": {
+      "line1": "Shaun",
+      "line2": "Ruddy"
+    },
+    "subtitle": "Multidisciplinary engineer bridging mechanical design, embedded systems, and machine learning — building the next generation of intelligent robotic systems.",
+    "subtitleHtml": "Multidisciplinary engineer bridging <strong>mechanical design</strong>, <strong>embedded systems</strong>, and <strong>machine learning</strong> — building the next generation of intelligent robotic systems.",
+    "cta": [
+      { "label": "View Projects", "href": "#projects", "style": "primary" },
+      { "label": "Get in Touch", "href": "#contact", "style": "outline" },
+      {
+        "href": "https://github.com/ShaunRuddy",
+        "style": "outline"
+      }
+    ],
+    "summaryCards": [
+      {
+        "id": "education",
+        "label": "Education",
+        "value": "3 Degrees",
+        "detail": [
+          "M.Eng. Robotics & AI — University of Toronto",
+          "B.Eng. Mechanical Engineering — University of Ottawa",
+          "BSc. Computing Technology — University of Ottawa"
+        ]
+      },
+      {
+        "id": "workExperience",
+        "label": "Work Experience",
+        "value": "5+ Years",
+        "detail": [
+          "Robotics Perception Eng. — aRobotics (2025–Present)",
+          "Additive Mfg. Intern — Equispheres (2023)",
+          "Mechanical Intern — ICOR Technology (2019)"
+        ]
+      },
+      {
+        "id": "currentRole",
+        "label": "Current Title",
+        "value": "Robotics Perception Engineer",
+        "detail": [
+          "aRobotics Company · Ossining, NY",
+          "Multi-sensor pipelines · Embedded perception",
+          "NVIDIA Jetson Orin Nano"
+        ]
+      }
+    ]
+  },
+  "about": {
+    "sectionLabel": "About",
+    "headline": "Engineer by Training,\nBuilder by Nature",
+    "paragraphsHtml": [
+      "I hold a <strong>Master of Engineering in Robotics &amp; AI</strong> from the University of Toronto, alongside dual Bachelor's degrees in <strong>Mechanical Engineering</strong> and <strong>Computing Technology</strong> from the University of Ottawa.",
+      "Currently working as a <strong>Robotics Perception Engineer</strong> in Ossining, NY, I specialize in deploying multi-sensor software pipelines on embedded platforms like the NVIDIA Jetson Orin Nano, developing infrared processing algorithms, and pursuing SLAM and reinforcement learning research.",
+      "I've also developed a <strong>novel non-destructive testing system</strong> capable of detecting micron-scale fatigue cracks — work that has attracted interest from the U.S. Air Force.",
+      "Outside the lab, I've captained a competitive ultimate frisbee team to a provincial championship and was a provincial robotics tournament finalist."
+    ]
+  },
+  "education": [
+    {
+      "degree": "M.Eng.",
+      "years": "2024–2025",
+      "title": "Robotics and Artificial Intelligence",
+      "school": "University of Toronto"
+    },
+    {
+      "degree": "B.Eng.",
+      "years": "2017–2023",
+      "title": "Mechanical Engineering",
+      "school": "University of Ottawa"
+    },
+    {
+      "degree": "BSc.",
+      "years": "2017–2023",
+      "title": "Computing Technology",
+      "school": "University of Ottawa"
+    }
+  ],
+  "skills": {
+    "sectionLabel": "Capabilities",
+    "headline": "Skills & Tools",
+    "groups": [
+      {
+        "title": "Languages & Frameworks",
+        "items": ["Python", "C++", "Java", "ROS2", "OOP"]
+      },
+      {
+        "title": "Machine Learning & AI",
+        "items": ["PyTorch", "TensorFlow", "Scikit-learn", "CNNs", "GANs"]
+      },
+      {
+        "title": "Perception & Control",
+        "items": [
+          "Computer Vision",
+          "Homography",
+          "Stereo Vision",
+          "SLAM",
+          "Motion Planning"
+        ]
+      },
+      {
+        "title": "Embedded & Hardware",
+        "items": ["NVIDIA Jetson", "CAN", "SPI", "I2C", "Embedded Linux"]
+      },
+      {
+        "title": "CAD & Design",
+        "items": ["SolidWorks", "Fusion 360", "DraftSight", "FEA", "DFAM"]
+      },
+      {
+        "title": "Fabrication & Analysis",
+        "items": [
+          "3D Printing",
+          "CNC Machining",
+          "MATLAB",
+          "Topology Opt.",
+          "Soldering"
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "sectionLabel": "Career",
+    "headline": "Professional Experience",
+    "roles": [
+      {
+        "dateRange": "Sept 2025 – Present",
+        "company": "aRobotics Company",
+        "location": "Ossining, NY",
+        "title": "Robotics Perception Engineer",
+        "bullets": [
+          "Deployed multi-sensor software pipeline on NVIDIA Jetson Orin Nano, designing embedded communication structure (CAN, SPI, I2C) and integrating low-level firmware in Python and C++.",
+          "Developed performance-critical infrared processing algorithms including flat-field correction and advanced noise mitigation.",
+          "Pursuing SLAM and Isaac Sim / Isaac Lab reinforcement learning policy training.",
+          "Developed a novel non-destructive testing system capable of detecting micron-scale fatigue cracks — attracting interest from the U.S. Air Force."
+        ]
+      },
+      {
+        "dateRange": "May 2023 – Nov 2023",
+        "company": "Equispheres",
+        "location": "Ottawa, ON",
+        "title": "Additive Manufacturing Engineering Intern",
+        "bullets": [
+          "Designed and fabricated aerospace-grade components adhering to industry standards and DFAM process.",
+          "Conducted research on powder quality, analyzing printing density outcomes based on laser speed, power, and hatch distance.",
+          "Leveraged data analytics techniques to enhance marketing and sales decision making."
+        ]
+      },
+      {
+        "dateRange": "Apr 2019 – Aug 2019",
+        "company": "ICOR Technology",
+        "location": "Ottawa, ON",
+        "title": "Mechanical Engineering Intern",
+        "bullets": [
+          "Engineered parts, assemblies, and drawings in SolidWorks following the DFA process.",
+          "Designed a new protective transportation system for electrical components.",
+          "Identified software-related issues and suggested structured repair steps."
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "sectionLabel": "Portfolio",
+    "headline": "Featured Projects",
+    "categories": {
+      "hardware": {
+        "title": "Hardware",
+        "description": "Mechanical design, fabrication, and physical systems."
+      },
+      "software": {
+        "title": "Software",
+        "description": "Computer vision, robotics algorithms, and machine learning."
+      }
+    },
+    "hardware": [
+      {
+        "id": "electric-uav-capstone",
+        "layout": "wide",
+        "placeholder": {
+          "emoji": "🚁",
+          "label": "ELECTRIC UAV — CAPSTONE"
+        },
+        "images": [
+          {
+            "src": "assets/Drone_1_Screenshot_2026-03-30_18-27-06.png",
+            "alt": "Electric UAV exterior render"
+          },
+          {
+            "src": "assets/Drone_2_Screenshot_2026-03-30_18-27-25.png",
+            "alt": "Electric UAV CAD with labeled subsystems"
+          }
+        ],
+        "tags": ["Capstone", "Mechanical Design", "FEA"],
+        "title": "Electric UAV for Surveillance",
+        "description": "Team lead for the design of a fully electric UAV for image collection and surveillance. Responsible for all stress, strain, and fluid analysis, plus the planetary gearbox drivetrain and power unit.",
+        "constraints": {
+          "label": "Design Constraints",
+          "items": [
+            "<25kg total mass",
+            "2kg payload",
+            "15,000 ft altitude",
+            "45 km/h wind resistance",
+            "75 km/h top speed",
+            "1-hour flight time"
+          ]
+        },
+        "result": "Grade A+ · Planetary gearbox capable of 2× the maximum UAV lift force."
+      },
+      {
+        "id": "co2-electrolyzer-feed",
+
+        "placeholder": { "emoji": "⚗️" },
+        "tags": ["M.Eng. Project", "Systems Engineering"],
+        "title": "CO₂ Electrolyzer Feed System",
+        "description": "Engineered a continuous material handling system for precise KHCO₃ solution delivery into a CO₂ electrolyzer, enabling sustainable carbon capture research.",
+        "result": "Stable, continuous-flow system supporting active electrolyzer operation."
+      }
+    ],
+    "software": [
+      {
+        "id": "homography-mapping",
+        "placeholder": { "emoji": "🖼️" },
+        "tags": ["Computer Vision", "Python"],
+        "title": "Homography Mapping",
+        "description": "Replaced a CN Tower billboard with the Soldiers' Tower image while maintaining full perspective accuracy. Computed the homography matrix and performed inverse homography warping.",
+        "result": "Successfully maintained perspective with zero distortion artifacts."
+      },
+      {
+        "id": "stereo-depth",
+        "placeholder": { "emoji": "📷" },
+        "tags": ["Computer Vision", "Depth Estimation"],
+        "title": "Stereo Vision Depth Estimation",
+        "description": "Depth estimation from pixel coordinates of two offset cameras. Calculated row-wise disparity between pixel kernels and output depth on a colour scale using the inverse disparity relationship.",
+        "result": "Valid pixels: 133,346 · RMS Error: 4.17 · Bad pixel rate: 0.10%"
+      },
+      {
+        "id": "rrt-motion-planning",
+        "placeholder": { "emoji": "🤖" },
+        "tags": ["Robotics", "Motion Planning"],
+        "title": "RRT & RRT* Motion Planning",
+        "description": "Developed both RRT and RRT* algorithms for robot motion planning in obstacle-rich workspaces. Visualized explored paths, obstacles, and optimal routes through workspace graphs.",
+        "result": "Successful paths found on all attempts in under 200 iterations."
+      },
+      {
+        "id": "gan-colourization",
+        "placeholder": { "emoji": "🎨" },
+        "tags": ["Deep Learning", "GAN", "PyTorch"],
+        "title": "GAN Image Colourization",
+        "description": "Constructed a Generative Adversarial Network to colourize greyscale images. Used an autoencoder generator with a discriminator to distinguish true from AI-colourized images.",
+        "result": "High-quality colourization with low adversarial loss."
+      }
+    ]
+  },
+  "contact": {
+    "sectionLabel": "Contact",
+    "headline": "Let's Build Something",
+    "body": "I'm always open to interesting engineering challenges — robotics, embedded systems, machine learning, or mechanical design. Feel free to reach out.",
+    "links": [
+      {
+        "type": "email",
+        "label": "srudd987@gmail.com",
+        "href": "mailto:srudd987@gmail.com"
+      },
+      {
+        "type": "phone",
+        "label": "(613) 805-1589",
+        "href": "tel:6138051589"
+      },
+      {
+        "type": "linkedin",
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/shaun-ruddy-02a656178"
+      }
+    ],
+    "footerNote": "Based in Ottawa, ON · Open to opportunities in robotics, mechatronics & AI"
+  },
+  "footer": {
+    "name": "Shaun Ruddy",
+    "credentials": "MEng · BEng · BSc · Robotics Perception Engineer"
+  }
+}

@@ -1,2 +1,4 @@
-# shaun_portfolio
-My website portfolio.
+# Shauns Sexy Portfolio
+
+Sexified by Me
+-Olivie Bergeron
