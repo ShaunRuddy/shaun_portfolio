@@ -333,19 +333,132 @@
     object-fit: cover;
     display: block;
   }
-  .project-media-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
-    gap: 3px;
-    min-height: 190px;
-    height: 100%;
+
+  .project-carousel {
+    position: relative;
+    outline: none;
   }
-  .project-media-grid img {
+  .project-carousel:focus-visible {
+    box-shadow: inset 0 0 0 2px rgba(56,178,172,0.45);
+  }
+  .project-carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    min-height: 190px;
+  }
+  .project-carousel-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .project-carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-height: 190px;
+  }
+  .project-carousel-slide img {
     width: 100%;
     height: 100%;
-    min-height: 100px;
+    min-height: 190px;
     object-fit: cover;
     display: block;
+  }
+  .project-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 50%;
+    background: rgba(8, 18, 32, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--white);
+    box-shadow:
+      0 2px 12px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 0.22s cubic-bezier(0.34, 1.2, 0.64, 1),
+      border-color 0.22s,
+      background 0.22s,
+      color 0.22s,
+      box-shadow 0.22s;
+  }
+  .project-carousel-btn:hover {
+    transform: translateY(-50%) scale(1.06);
+    border-color: rgba(56,178,172,0.55);
+    color: var(--teal);
+    background: rgba(12, 26, 46, 0.72);
+    box-shadow:
+      0 6px 28px rgba(0,0,0,0.4),
+      0 0 0 1px rgba(56,178,172,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .project-carousel-btn:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+  .project-carousel-btn:focus-visible {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow:
+      0 0 0 3px rgba(12,26,46,0.95),
+      0 0 0 5px rgba(56,178,172,0.45);
+  }
+  .project-carousel-icon {
+    width: 22px;
+    height: 22px;
+    display: block;
+    flex-shrink: 0;
+    opacity: 0.92;
+  }
+  .project-carousel-btn:hover .project-carousel-icon {
+    opacity: 1;
+  }
+  .project-carousel-prev { left: 10px; }
+  .project-carousel-next { right: 10px; }
+  .project-carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: rgba(12,26,46,0.55);
+  }
+  .project-carousel-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.28);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .project-carousel-dot:hover {
+    background: rgba(255,255,255,0.5);
+  }
+  .project-carousel-dot.is-active {
+    background: var(--teal);
+    transform: scale(1.15);
+  }
+
+  .project-card.wide .project-carousel-viewport,
+  .project-card.wide .project-carousel-slide {
+    min-height: 220px;
+  }
+  .project-card.wide .project-carousel-slide img {
+    min-height: 220px;
   }
 
   /* ── CONTACT ── */
@@ -470,6 +583,11 @@
     .project-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
     .project-card.wide .project-img-placeholder { height: 190px; min-height: 190px; }
     .project-card.wide .project-media { min-height: 190px; height: 190px; }
+    .project-card.wide .project-carousel-viewport,
+    .project-card.wide .project-carousel-slide,
+    .project-card.wide .project-carousel-slide img {
+      min-height: 190px;
+    }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
   }
   @media (max-width: 850px) and (prefers-reduced-motion: reduce) {
@@ -477,5 +595,18 @@
     .nav-backdrop,
     .nav-toggle-bar {
       transition: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-carousel-track {
+      transition: none;
+    }
+    .project-carousel-btn {
+      transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .project-carousel-btn:hover,
+    .project-carousel-btn:active {
+      transform: translateY(-50%);
     }
   }
