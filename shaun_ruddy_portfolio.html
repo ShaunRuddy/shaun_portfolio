@@ -275,6 +275,52 @@
   .project-result { background: rgba(56,178,172,0.05); border-left: 2px solid var(--teal); padding: 0.55rem 0.85rem; font-size: 0.78rem; color: var(--grey-pale); font-style: italic; }
   .project-card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
   .project-card.wide .project-img-placeholder { height: 100%; min-height: 220px; }
+  .project-card.wide .project-media { min-height: 220px; height: 100%; }
+
+  .project-category { margin-bottom: 3.5rem; }
+  .project-category:last-of-type { margin-bottom: 0; }
+  .project-category-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 0.45rem;
+  }
+  .project-category-desc {
+    font-size: 0.88rem;
+    color: var(--grey-light);
+    margin-bottom: 1.5rem;
+    max-width: 720px;
+    line-height: 1.55;
+  }
+  .project-media {
+    width: 100%;
+    min-height: 190px;
+    background: linear-gradient(135deg, var(--navy-light) 0%, var(--steel) 55%);
+    overflow: hidden;
+    align-self: stretch;
+  }
+  .project-media--single img {
+    width: 100%;
+    height: 100%;
+    min-height: 190px;
+    object-fit: cover;
+    display: block;
+  }
+  .project-media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 3px;
+    min-height: 190px;
+    height: 100%;
+  }
+  .project-media-grid img {
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    object-fit: cover;
+    display: block;
+  }
 
   /* ── CONTACT ── */
   #contact { background: var(--navy-mid); text-align: center; }
@@ -319,7 +365,8 @@
     .exp-meta { text-align: left; }
     .hero-cards { grid-template-columns: 1fr; }
     .project-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
-    .project-card.wide .project-img-placeholder { height: 190px; }
+    .project-card.wide .project-img-placeholder { height: 190px; min-height: 190px; }
+    .project-card.wide .project-media { min-height: 190px; height: 190px; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
     .nav-links { gap: 0.3rem; }
     .nav-links a { padding: 0.4rem 0.7rem; font-size: 0.65rem; }
@@ -518,42 +565,86 @@
     ${itemsHtml}`;
   }
 
-  function renderProjects(data) {
-    const p = data.projects;
-    let gridHtml = '';
-    p.items.forEach((proj) => {
-      const wide = proj.layout === 'wide';
-      const cardClass = wide ? 'project-card wide reveal' : 'project-card reveal';
-      const ph = proj.placeholder || {};
-      let placeholderHtml;
-      if (wide && ph.emoji && ph.label) {
-        placeholderHtml = `<div class="project-img-placeholder" style="background:linear-gradient(135deg,#0d2137 0%,#1a3455 100%);font-size:0.9rem;color:var(--grey-pale);letter-spacing:1px;flex-direction:column;gap:0.6rem;">
+  function normalizeProjectImage(img) {
+    if (typeof img === 'string' && img.trim()) return { src: img.trim(), alt: '' };
+    if (img && typeof img.src === 'string' && img.src.trim()) {
+      return { src: img.src.trim(), alt: (img.alt || '').trim() };
+    }
+    return null;
+  }
+
+  function getProjectImages(proj) {
+    if (!Array.isArray(proj.images)) return [];
+    return proj.images.map(normalizeProjectImage).filter(Boolean);
+  }
+
+  function renderProjectMedia(proj) {
+    const imgs = getProjectImages(proj);
+    const ph = proj.placeholder || {};
+    if (imgs.length > 0) {
+      if (imgs.length === 1) {
+        const alt = imgs[0].alt || proj.title;
+        return `<div class="project-media project-media--single"><img src="${escapeHtml(imgs[0].src)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async"></div>`;
+      }
+      let inner = '';
+      imgs.forEach((im) => {
+        inner += `<img src="${escapeHtml(im.src)}" alt="${escapeHtml(im.alt || proj.title)}" loading="lazy" decoding="async">`;
+      });
+      return `<div class="project-media project-media--multi"><div class="project-media-grid">${inner}</div></div>`;
+    }
+    if (proj.layout === 'wide' && ph.emoji && ph.label) {
+      return `<div class="project-img-placeholder" style="background:linear-gradient(135deg,#0d2137 0%,#1a3455 100%);font-size:0.9rem;color:var(--grey-pale);letter-spacing:1px;flex-direction:column;gap:0.6rem;">
           <span style="font-size:3rem">${ph.emoji}</span>${escapeHtml(ph.label)}
         </div>`;
-      } else {
-        placeholderHtml = `<div class="project-img-placeholder">${ph.emoji || ''}</div>`;
-      }
+    }
+    return `<div class="project-img-placeholder">${ph.emoji || ''}</div>`;
+  }
 
-      const tagLine = proj.tags.map((t) => escapeHtml(t)).join(' · ');
-      let bodyHtml = `
+  function renderProjectCard(proj) {
+    const wide = proj.layout === 'wide';
+    const cardClass = wide ? 'project-card wide reveal' : 'project-card reveal';
+    const mediaHtml = renderProjectMedia(proj);
+    const tagLine = proj.tags.map((t) => escapeHtml(t)).join(' · ');
+    let bodyHtml = `
         <div class="project-tag">${tagLine}</div>
         <div class="project-title">${escapeHtml(proj.title)}</div>
         <p class="project-desc">${escapeHtml(proj.description)}</p>`;
+    if (proj.constraints && proj.constraints.items && proj.constraints.items.length) {
+      const constraintText = proj.constraints.items.map((x) => escapeHtml(x)).join(' · ');
+      bodyHtml += `<p class="project-desc"><strong style="color:var(--warm)">${escapeHtml(proj.constraints.label)}:</strong> ${constraintText}</p>`;
+    }
+    bodyHtml += `<div class="project-result">${escapeHtml(proj.result)}</div>`;
+    return `<div class="${cardClass}">${mediaHtml}<div class="project-body">${bodyHtml}</div></div>`;
+  }
 
-      if (proj.constraints && proj.constraints.items && proj.constraints.items.length) {
-        const constraintText = proj.constraints.items.map((x) => escapeHtml(x)).join(' · ');
-        bodyHtml += `<p class="project-desc"><strong style="color:var(--warm)">${escapeHtml(proj.constraints.label)}:</strong> ${constraintText}</p>`;
-      }
+  function renderProjects(data) {
+    const p = data.projects;
+    const labels = p.categories || {};
+    const order = ['hardware', 'software'];
+    let html = `
+    <div class="section-label">${escapeHtml(p.sectionLabel)}</div>
+    <h2>${escapeHtml(p.headline)}</h2>`;
 
-      bodyHtml += `<div class="project-result">${escapeHtml(proj.result)}</div>`;
-
-      gridHtml += `<div class="${cardClass}">${placeholderHtml}<div class="project-body">${bodyHtml}</div></div>`;
+    order.forEach((key) => {
+      const items = p[key];
+      if (!items || !items.length) return;
+      const cat = labels[key] || { title: key, description: '' };
+      let gridHtml = '';
+      items.forEach((proj) => {
+        gridHtml += renderProjectCard(proj);
+      });
+      const descHtml = cat.description
+        ? `<p class="project-category-desc">${escapeHtml(cat.description)}</p>`
+        : '';
+      html += `
+    <div class="project-category">
+      <h3 class="project-category-title">${escapeHtml(cat.title)}</h3>
+      ${descHtml}
+      <div class="projects-grid">${gridHtml}</div>
+    </div>`;
     });
 
-    document.getElementById('projects-root').innerHTML = `
-    <div class="section-label">${escapeHtml(p.sectionLabel)}</div>
-    <h2>${escapeHtml(p.headline)}</h2>
-    <div class="projects-grid">${gridHtml}</div>`;
+    document.getElementById('projects-root').innerHTML = html;
   }
 
   function renderContact(data) {

@@ -160,7 +160,17 @@
   "projects": {
     "sectionLabel": "Portfolio",
     "headline": "Featured Projects",
-    "items": [
+    "categories": {
+      "hardware": {
+        "title": "Hardware",
+        "description": "Mechanical design, fabrication, and physical systems."
+      },
+      "software": {
+        "title": "Software",
+        "description": "Computer vision, robotics algorithms, and machine learning."
+      }
+    },
+    "hardware": [
       {
         "id": "electric-uav-capstone",
         "layout": "wide",
@@ -184,6 +194,16 @@
         },
         "result": "Grade A+ · Planetary gearbox capable of 2× the maximum UAV lift force."
       },
+      {
+        "id": "co2-electrolyzer-feed",
+        "placeholder": { "emoji": "⚗️" },
+        "tags": ["M.Eng. Project", "Systems Engineering"],
+        "title": "CO₂ Electrolyzer Feed System",
+        "description": "Engineered a continuous material handling system for precise KHCO₃ solution delivery into a CO₂ electrolyzer, enabling sustainable carbon capture research.",
+        "result": "Stable, continuous-flow system supporting active electrolyzer operation."
+      }
+    ],
+    "software": [
       {
         "id": "homography-mapping",
         "placeholder": { "emoji": "🖼️" },
@@ -215,14 +235,6 @@
         "title": "GAN Image Colourization",
         "description": "Constructed a Generative Adversarial Network to colourize greyscale images. Used an autoencoder generator with a discriminator to distinguish true from AI-colourized images.",
         "result": "High-quality colourization with low adversarial loss."
-      },
-      {
-        "id": "co2-electrolyzer-feed",
-        "placeholder": { "emoji": "⚗️" },
-        "tags": ["M.Eng. Project", "Systems Engineering"],
-        "title": "CO₂ Electrolyzer Feed System",
-        "description": "Engineered a continuous material handling system for precise KHCO₃ solution delivery into a CO₂ electrolyzer, enabling sustainable carbon capture research.",
-        "result": "Stable, continuous-flow system supporting active electrolyzer operation."
       }
     ]
   },
