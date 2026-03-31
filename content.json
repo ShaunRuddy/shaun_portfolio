@@ -101,7 +101,13 @@
       },
       {
         "title": "Perception & Control",
-        "items": ["Computer Vision", "Homography", "Stereo Vision", "SLAM", "Motion Planning"]
+        "items": [
+          "Computer Vision",
+          "Homography",
+          "Stereo Vision",
+          "SLAM",
+          "Motion Planning"
+        ]
       },
       {
         "title": "Embedded & Hardware",
@@ -113,7 +119,13 @@
       },
       {
         "title": "Fabrication & Analysis",
-        "items": ["3D Printing", "CNC Machining", "MATLAB", "Topology Opt.", "Soldering"]
+        "items": [
+          "3D Printing",
+          "CNC Machining",
+          "MATLAB",
+          "Topology Opt.",
+          "Soldering"
+        ]
       }
     ]
   },
@@ -178,6 +190,16 @@
           "emoji": "🚁",
           "label": "ELECTRIC UAV — CAPSTONE"
         },
+        "images": [
+          {
+            "src": "assets/Drone_1_Screenshot_2026-03-30_18-27-06.png",
+            "alt": "Electric UAV exterior render"
+          },
+          {
+            "src": "assets/Drone_2_Screenshot_2026-03-30_18-27-25.png",
+            "alt": "Electric UAV CAD with labeled subsystems"
+          }
+        ],
         "tags": ["Capstone", "Mechanical Design", "FEA"],
         "title": "Electric UAV for Surveillance",
         "description": "Team lead for the design of a fully electric UAV for image collection and surveillance. Responsible for all stress, strain, and fluid analysis, plus the planetary gearbox drivetrain and power unit.",
