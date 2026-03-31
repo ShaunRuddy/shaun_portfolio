@@ -10,7 +10,11 @@
     { "label": "Skills", "href": "#skills" },
     { "label": "Experience", "href": "#experience" },
     { "label": "Projects", "href": "#projects" },
-    { "label": "Contact", "href": "#contact" }
+    { "label": "Contact", "href": "#contact" },
+    {
+      "label": "Portfolio",
+      "href": "assets/Shaun Ruddy Engineering Portfolio.pdf"
+    }
   ],
   "hero": {
     "eyebrow": "Mechatronics · Robotics · AI",
@@ -22,7 +26,11 @@
     "subtitleHtml": "Multidisciplinary engineer bridging <strong>mechanical design</strong>, <strong>embedded systems</strong>, and <strong>machine learning</strong> — building the next generation of intelligent robotic systems.",
     "cta": [
       { "label": "View Projects", "href": "#projects", "style": "primary" },
-      { "label": "Get in Touch", "href": "#contact", "style": "outline" }
+      { "label": "Get in Touch", "href": "#contact", "style": "outline" },
+      {
+        "href": "https://github.com/ShaunRuddy",
+        "style": "outline"
+      }
     ],
     "summaryCards": [
       {
