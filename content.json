@@ -218,6 +218,7 @@
       },
       {
         "id": "co2-electrolyzer-feed",
+
         "placeholder": { "emoji": "⚗️" },
         "tags": ["M.Eng. Project", "Systems Engineering"],
         "title": "CO₂ Electrolyzer Feed System",
