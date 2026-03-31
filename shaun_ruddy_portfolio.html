@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shaun Ruddy — Engineering Portfolio</title>
+<title></title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -328,317 +328,302 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">SR</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<nav id="site-nav" aria-label="Primary"></nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Mechatronics · Robotics · AI</div>
-    <h1>Shaun<span>Ruddy</span></h1>
-    <p class="hero-sub">Multidisciplinary engineer bridging <strong>mechanical design</strong>, <strong>embedded systems</strong>, and <strong>machine learning</strong> — building the next generation of intelligent robotic systems.</p>
-
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
-    </div>
-
-    <div class="hero-cards">
-      <div class="hero-card card-edu">
-        <span class="hc-icon">🎓</span>
-        <div class="hc-label">Education</div>
-        <div class="hc-value">3 Degrees</div>
-        <div class="hc-detail">
-          M.Eng. Robotics &amp; AI — University of Toronto<br>
-          B.Eng. Mechanical Engineering — University of Ottawa<br>
-          BSc. Computing Technology — University of Ottawa
-        </div>
-      </div>
-      <div class="hero-card card-exp">
-        <span class="hc-icon">💼</span>
-        <div class="hc-label">Work Experience</div>
-        <div class="hc-value">5+ Years</div>
-        <div class="hc-detail">
-          Robotics Perception Eng. — aRobotics (2025–Present)<br>
-          Additive Mfg. Intern — Equispheres (2023)<br>
-          Mechanical Intern — ICOR Technology (2019)
-        </div>
-      </div>
-      <div class="hero-card card-role">
-        <span class="hc-icon">🤖</span>
-        <div class="hc-label">Current Title</div>
-        <div class="hc-value">Robotics Perception Engineer</div>
-        <div class="hc-detail">
-          aRobotics Company · Ossining, NY<br>
-          Multi-sensor pipelines · Embedded perception<br>
-          NVIDIA Jetson Orin Nano
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="hero-inner" id="hero-root"></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ABOUT -->
 <section id="about">
-  <div class="about-grid">
+  <div class="about-grid" id="about-root"></div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="skills-container" id="skills-root"></div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience">
+  <div class="exp-container" id="experience-root"></div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects">
+  <div class="projects-container" id="projects-root"></div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="contact-inner" id="contact-root"></div>
+</section>
+
+<footer id="site-footer"></footer>
+
+<script>
+(function () {
+  const HERO_CARD_ICONS = ['🎓', '💼', '🤖'];
+  const HERO_CARD_CLASSES = ['card-edu', 'card-exp', 'card-role'];
+  const CONTACT_ICON = { email: '✉', phone: '📞', linkedin: 'in' };
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function contactLinkLabel(type, label) {
+    if (type === 'linkedin') return CONTACT_ICON.linkedin + ' LinkedIn';
+    return CONTACT_ICON[type] + ' ' + label;
+  }
+
+  function renderNav(meta, navigation) {
+    const nav = document.getElementById('site-nav');
+    const ul = document.createElement('ul');
+    ul.className = 'nav-links';
+    navigation.forEach((item) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = item.href;
+      a.textContent = item.label;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    nav.innerHTML = '';
+    const logo = document.createElement('div');
+    logo.className = 'nav-logo';
+    logo.textContent = meta.initials;
+    nav.appendChild(logo);
+    nav.appendChild(ul);
+  }
+
+  function renderHero(data) {
+    const h = data.hero;
+    const headline = h.headline;
+    const subtitleHtml = h.subtitleHtml || h.subtitle;
+
+    let ctaHtml = '';
+    h.cta.forEach((btn) => {
+      const cls = btn.style === 'primary' ? 'btn btn-primary' : 'btn btn-outline';
+      ctaHtml += `<a href="${escapeHtml(btn.href)}" class="${cls}">${escapeHtml(btn.label)}</a>`;
+    });
+
+    let cardsHtml = '';
+    h.summaryCards.forEach((card, i) => {
+      const cardClass = HERO_CARD_CLASSES[i] || 'card-edu';
+      const icon = HERO_CARD_ICONS[i] || '•';
+      const detailLines = card.detail.map((line) => escapeHtml(line)).join('<br>\n');
+      cardsHtml += `
+      <div class="hero-card ${cardClass}">
+        <span class="hc-icon">${icon}</span>
+        <div class="hc-label">${escapeHtml(card.label)}</div>
+        <div class="hc-value">${escapeHtml(card.value)}</div>
+        <div class="hc-detail">${detailLines}</div>
+      </div>`;
+    });
+
+    document.getElementById('hero-root').innerHTML = `
+    <div class="hero-eyebrow">${escapeHtml(h.eyebrow)}</div>
+    <h1>${escapeHtml(headline.line1)}<span>${escapeHtml(headline.line2)}</span></h1>
+    <p class="hero-sub">${subtitleHtml}</p>
+    <div class="hero-cta">${ctaHtml}</div>
+    <div class="hero-cards">${cardsHtml}</div>`;
+  }
+
+  function renderAbout(data) {
+    const a = data.about;
+    const headlineHtml = escapeHtml(a.headline).replace(/\n/g, '<br>');
+    let parasHtml = '';
+    (a.paragraphsHtml || []).forEach((html) => {
+      parasHtml += `<p>${html}</p>`;
+    });
+
+    let eduHtml = '';
+    data.education.forEach((edu) => {
+      eduHtml += `
+      <div class="edu-card">
+        <div class="edu-degree">${escapeHtml(edu.degree)} · ${escapeHtml(edu.years)}</div>
+        <div class="edu-title">${escapeHtml(edu.title)}</div>
+        <div class="edu-school">${escapeHtml(edu.school)}</div>
+      </div>`;
+    });
+
+    document.getElementById('about-root').innerHTML = `
     <div class="about-text reveal">
-      <div class="section-label">About</div>
-      <h2>Engineer by Training,<br>Builder by Nature</h2>
-      <p>I hold a <strong>Master of Engineering in Robotics &amp; AI</strong> from the University of Toronto, alongside dual Bachelor's degrees in <strong>Mechanical Engineering</strong> and <strong>Computing Technology</strong> from the University of Ottawa.</p>
-      <p>Currently working as a <strong>Robotics Perception Engineer</strong> in Ossining, NY, I specialize in deploying multi-sensor software pipelines on embedded platforms like the NVIDIA Jetson Orin Nano, developing infrared processing algorithms, and pursuing SLAM and reinforcement learning research.</p>
-      <p>I've also developed a <strong>novel non-destructive testing system</strong> capable of detecting micron-scale fatigue cracks — work that has attracted interest from the U.S. Air Force.</p>
-      <p>Outside the lab, I've captained a competitive ultimate frisbee team to a provincial championship and was a provincial robotics tournament finalist.</p>
+      <div class="section-label">${escapeHtml(a.sectionLabel)}</div>
+      <h2>${headlineHtml}</h2>
+      ${parasHtml}
     </div>
     <div class="edu-cards reveal">
       <div class="section-label">Education</div>
-      <div class="edu-card">
-        <div class="edu-degree">M.Eng. · 2024–2025</div>
-        <div class="edu-title">Robotics and Artificial Intelligence</div>
-        <div class="edu-school">University of Toronto</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-degree">B.Eng. · 2017–2023</div>
-        <div class="edu-title">Mechanical Engineering</div>
-        <div class="edu-school">University of Ottawa</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-degree">BSc. · 2017–2023</div>
-        <div class="edu-title">Computing Technology</div>
-        <div class="edu-school">University of Ottawa</div>
-      </div>
-    </div>
-  </div>
-</section>
+      ${eduHtml}
+    </div>`;
+  }
 
-<div class="divider"></div>
+  function renderSkills(data) {
+    const s = data.skills;
+    let groupsHtml = '';
+    s.groups.forEach((g) => {
+      let tags = '';
+      g.items.forEach((t) => {
+        tags += `<span class="tag">${escapeHtml(t)}</span>`;
+      });
+      groupsHtml += `
+      <div class="skill-group">
+        <div class="skill-group-title">${escapeHtml(g.title)}</div>
+        <div class="skill-tags">${tags}</div>
+      </div>`;
+    });
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="skills-container">
-    <div class="section-label">Capabilities</div>
-    <h2>Skills &amp; Tools</h2>
-    <div class="skills-grid reveal">
-      <div class="skill-group">
-        <div class="skill-group-title">Languages &amp; Frameworks</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span><span class="tag">C++</span>
-          <span class="tag">Java</span><span class="tag">ROS2</span><span class="tag">OOP</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Machine Learning &amp; AI</div>
-        <div class="skill-tags">
-          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span>
-          <span class="tag">Scikit-learn</span><span class="tag">CNNs</span><span class="tag">GANs</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Perception &amp; Control</div>
-        <div class="skill-tags">
-          <span class="tag">Computer Vision</span><span class="tag">Homography</span>
-          <span class="tag">Stereo Vision</span><span class="tag">SLAM</span><span class="tag">Motion Planning</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Embedded &amp; Hardware</div>
-        <div class="skill-tags">
-          <span class="tag">NVIDIA Jetson</span><span class="tag">CAN</span>
-          <span class="tag">SPI</span><span class="tag">I2C</span><span class="tag">Embedded Linux</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">CAD &amp; Design</div>
-        <div class="skill-tags">
-          <span class="tag">SolidWorks</span><span class="tag">Fusion 360</span>
-          <span class="tag">DraftSight</span><span class="tag">FEA</span><span class="tag">DFAM</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Fabrication &amp; Analysis</div>
-        <div class="skill-tags">
-          <span class="tag">3D Printing</span><span class="tag">CNC Machining</span>
-          <span class="tag">MATLAB</span><span class="tag">Topology Opt.</span><span class="tag">Soldering</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    document.getElementById('skills-root').innerHTML = `
+    <div class="section-label">${escapeHtml(s.sectionLabel)}</div>
+    <h2>${escapeHtml(s.headline)}</h2>
+    <div class="skills-grid reveal">${groupsHtml}</div>`;
+  }
 
-<div class="divider"></div>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="exp-container">
-    <div class="section-label">Career</div>
-    <h2>Professional Experience</h2>
+  function renderExperience(data) {
+    const e = data.experience;
+    let itemsHtml = '';
+    e.roles.forEach((role) => {
+      let bullets = '';
+      role.bullets.forEach((b) => {
+        bullets += `<li>${escapeHtml(b)}</li>`;
+      });
+      itemsHtml += `
     <div class="exp-item reveal">
       <div class="exp-meta">
-        <div class="exp-date">Sept 2025 – Present</div>
-        <div class="exp-company">aRobotics Company<br>Ossining, NY</div>
+        <div class="exp-date">${escapeHtml(role.dateRange)}</div>
+        <div class="exp-company">${escapeHtml(role.company)}<br>${escapeHtml(role.location)}</div>
       </div>
       <div>
-        <div class="exp-role">Robotics Perception Engineer</div>
-        <ul class="exp-bullets">
-          <li>Deployed multi-sensor software pipeline on NVIDIA Jetson Orin Nano, designing embedded communication structure (CAN, SPI, I2C) and integrating low-level firmware in Python and C++.</li>
-          <li>Developed performance-critical infrared processing algorithms including flat-field correction and advanced noise mitigation.</li>
-          <li>Pursuing SLAM and Isaac Sim / Isaac Lab reinforcement learning policy training.</li>
-          <li>Developed a novel non-destructive testing system capable of detecting micron-scale fatigue cracks — attracting interest from the U.S. Air Force.</li>
-        </ul>
+        <div class="exp-role">${escapeHtml(role.title)}</div>
+        <ul class="exp-bullets">${bullets}</ul>
       </div>
-    </div>
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">May 2023 – Nov 2023</div>
-        <div class="exp-company">Equispheres<br>Ottawa, ON</div>
-      </div>
-      <div>
-        <div class="exp-role">Additive Manufacturing Engineering Intern</div>
-        <ul class="exp-bullets">
-          <li>Designed and fabricated aerospace-grade components adhering to industry standards and DFAM process.</li>
-          <li>Conducted research on powder quality, analyzing printing density outcomes based on laser speed, power, and hatch distance.</li>
-          <li>Leveraged data analytics techniques to enhance marketing and sales decision making.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">Apr 2019 – Aug 2019</div>
-        <div class="exp-company">ICOR Technology<br>Ottawa, ON</div>
-      </div>
-      <div>
-        <div class="exp-role">Mechanical Engineering Intern</div>
-        <ul class="exp-bullets">
-          <li>Engineered parts, assemblies, and drawings in SolidWorks following the DFA process.</li>
-          <li>Designed a new protective transportation system for electrical components.</li>
-          <li>Identified software-related issues and suggested structured repair steps.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+    </div>`;
+    });
 
-<div class="divider"></div>
+    document.getElementById('experience-root').innerHTML = `
+    <div class="section-label">${escapeHtml(e.sectionLabel)}</div>
+    <h2>${escapeHtml(e.headline)}</h2>
+    ${itemsHtml}`;
+  }
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="projects-container">
-    <div class="section-label">Portfolio</div>
-    <h2>Featured Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card wide reveal">
-        <div class="project-img-placeholder" style="background:linear-gradient(135deg,#0d2137 0%,#1a3455 100%);font-size:0.9rem;color:var(--grey-pale);letter-spacing:1px;flex-direction:column;gap:0.6rem;">
-          <span style="font-size:3rem">🚁</span>ELECTRIC UAV — CAPSTONE
-        </div>
-        <div class="project-body">
-          <div class="project-tag">Capstone · Mechanical Design · FEA</div>
-          <div class="project-title">Electric UAV for Surveillance</div>
-          <p class="project-desc">Team lead for the design of a fully electric UAV for image collection and surveillance. Responsible for all stress, strain, and fluid analysis, plus the planetary gearbox drivetrain and power unit.</p>
-          <p class="project-desc"><strong style="color:var(--warm)">Design Constraints:</strong> &lt;25kg total mass · 2kg payload · 15,000 ft altitude · 45 km/h wind resistance · 75 km/h top speed · 1-hour flight time.</p>
-          <div class="project-result">Result: Grade A+ · Planetary gearbox capable of 2× the maximum UAV lift force.</div>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-img-placeholder">🖼️</div>
-        <div class="project-body">
-          <div class="project-tag">Computer Vision · Python</div>
-          <div class="project-title">Homography Mapping</div>
-          <p class="project-desc">Replaced a CN Tower billboard with the Soldiers' Tower image while maintaining full perspective accuracy. Computed the homography matrix and performed inverse homography warping.</p>
-          <div class="project-result">Result: Successfully maintained perspective with zero distortion artifacts.</div>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-img-placeholder">📷</div>
-        <div class="project-body">
-          <div class="project-tag">Computer Vision · Depth Estimation</div>
-          <div class="project-title">Stereo Vision Depth Estimation</div>
-          <p class="project-desc">Depth estimation from pixel coordinates of two offset cameras. Calculated row-wise disparity between pixel kernels and output depth on a colour scale using the inverse disparity relationship.</p>
-          <div class="project-result">Valid pixels: 133,346 · RMS Error: 4.17 · Bad pixel rate: 0.10%</div>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-img-placeholder">🤖</div>
-        <div class="project-body">
-          <div class="project-tag">Robotics · Motion Planning</div>
-          <div class="project-title">RRT &amp; RRT* Motion Planning</div>
-          <p class="project-desc">Developed both RRT and RRT* algorithms for robot motion planning in obstacle-rich workspaces. Visualized explored paths, obstacles, and optimal routes through workspace graphs.</p>
-          <div class="project-result">Result: Successful paths found on all attempts in under 200 iterations.</div>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-img-placeholder">🎨</div>
-        <div class="project-body">
-          <div class="project-tag">Deep Learning · GAN · PyTorch</div>
-          <div class="project-title">GAN Image Colourization</div>
-          <p class="project-desc">Constructed a Generative Adversarial Network to colourize greyscale images. Used an autoencoder generator with a discriminator to distinguish true from AI-colourized images.</p>
-          <div class="project-result">Result: High-quality colourization with low adversarial loss.</div>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-img-placeholder">⚗️</div>
-        <div class="project-body">
-          <div class="project-tag">M.Eng. Project · Systems Engineering</div>
-          <div class="project-title">CO₂ Electrolyzer Feed System</div>
-          <p class="project-desc">Engineered a continuous material handling system for precise KHCO₃ solution delivery into a CO₂ electrolyzer, enabling sustainable carbon capture research.</p>
-          <div class="project-result">Result: Stable, continuous-flow system supporting active electrolyzer operation.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-label" style="justify-content:center">Contact</div>
-    <h2>Let's Build Something</h2>
-    <p>I'm always open to interesting engineering challenges — robotics, embedded systems, machine learning, or mechanical design. Feel free to reach out.</p>
-    <div class="contact-links reveal">
-      <a href="mailto:srudd987@gmail.com" class="contact-link">✉ srudd987@gmail.com</a>
-      <a href="tel:6138051589" class="contact-link">📞 (613) 805-1589</a>
-      <a href="https://www.linkedin.com/in/shaun-ruddy-02a656178" target="_blank" class="contact-link">in LinkedIn</a>
-    </div>
-    <p style="font-size:0.78rem;color:var(--grey-mid)">Based in Ottawa, ON · Open to opportunities in robotics, mechatronics &amp; AI</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-name">Shaun Ruddy</div>
-  <div class="footer-copy">MEng · BEng · BSc · Robotics Perception Engineer</div>
-</footer>
-
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 75);
-        observer.unobserve(entry.target);
+  function renderProjects(data) {
+    const p = data.projects;
+    let gridHtml = '';
+    p.items.forEach((proj) => {
+      const wide = proj.layout === 'wide';
+      const cardClass = wide ? 'project-card wide reveal' : 'project-card reveal';
+      const ph = proj.placeholder || {};
+      let placeholderHtml;
+      if (wide && ph.emoji && ph.label) {
+        placeholderHtml = `<div class="project-img-placeholder" style="background:linear-gradient(135deg,#0d2137 0%,#1a3455 100%);font-size:0.9rem;color:var(--grey-pale);letter-spacing:1px;flex-direction:column;gap:0.6rem;">
+          <span style="font-size:3rem">${ph.emoji}</span>${escapeHtml(ph.label)}
+        </div>`;
+      } else {
+        placeholderHtml = `<div class="project-img-placeholder">${ph.emoji || ''}</div>`;
       }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => observer.observe(el));
 
-  document.querySelectorAll('.skills-grid, .projects-grid, .edu-cards').forEach(grid => {
-    grid.querySelectorAll('.reveal').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 0.07}s`;
+      const tagLine = proj.tags.map((t) => escapeHtml(t)).join(' · ');
+      let bodyHtml = `
+        <div class="project-tag">${tagLine}</div>
+        <div class="project-title">${escapeHtml(proj.title)}</div>
+        <p class="project-desc">${escapeHtml(proj.description)}</p>`;
+
+      if (proj.constraints && proj.constraints.items && proj.constraints.items.length) {
+        const constraintText = proj.constraints.items.map((x) => escapeHtml(x)).join(' · ');
+        bodyHtml += `<p class="project-desc"><strong style="color:var(--warm)">${escapeHtml(proj.constraints.label)}:</strong> ${constraintText}</p>`;
+      }
+
+      bodyHtml += `<div class="project-result">${escapeHtml(proj.result)}</div>`;
+
+      gridHtml += `<div class="${cardClass}">${placeholderHtml}<div class="project-body">${bodyHtml}</div></div>`;
     });
+
+    document.getElementById('projects-root').innerHTML = `
+    <div class="section-label">${escapeHtml(p.sectionLabel)}</div>
+    <h2>${escapeHtml(p.headline)}</h2>
+    <div class="projects-grid">${gridHtml}</div>`;
+  }
+
+  function renderContact(data) {
+    const c = data.contact;
+    let linksHtml = '';
+    c.links.forEach((link) => {
+      const target = link.type === 'linkedin' ? ' target="_blank" rel="noopener noreferrer"' : '';
+      const text = contactLinkLabel(link.type, link.label);
+      linksHtml += `<a href="${escapeHtml(link.href)}" class="contact-link"${target}>${escapeHtml(text)}</a>`;
+    });
+
+    document.getElementById('contact-root').innerHTML = `
+    <div class="section-label" style="justify-content:center">${escapeHtml(c.sectionLabel)}</div>
+    <h2>${escapeHtml(c.headline)}</h2>
+    <p>${escapeHtml(c.body)}</p>
+    <div class="contact-links reveal">${linksHtml}</div>
+    <p style="font-size:0.78rem;color:var(--grey-mid)">${escapeHtml(c.footerNote)}</p>`;
+  }
+
+  function renderFooter(data) {
+    const f = data.footer;
+    document.getElementById('site-footer').innerHTML = `
+    <div class="footer-name">${escapeHtml(f.name)}</div>
+    <div class="footer-copy">${escapeHtml(f.credentials)}</div>`;
+  }
+
+  function initReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 75);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach((el) => observer.observe(el));
+
+    document.querySelectorAll('.skills-grid, .projects-grid, .edu-cards').forEach((grid) => {
+      grid.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.07}s`;
+      });
+    });
+  }
+
+  async function main() {
+    const res = await fetch('content.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to load content.json');
+    const data = await res.json();
+
+    document.title = data.meta.pageTitle;
+    renderNav(data.meta, data.navigation);
+    renderHero(data);
+    renderAbout(data);
+    renderSkills(data);
+    renderExperience(data);
+    renderProjects(data);
+    renderContact(data);
+    renderFooter(data);
+    initReveal();
+  }
+
+  main().catch((err) => {
+    console.error(err);
+    document.body.insertAdjacentHTML(
+      'afterbegin',
+      '<p style="padding:2rem;background:#421;color:#fff;font-family:sans-serif">Could not load content. Open this page via a local server (e.g. <code>npx serve</code>) so <code>content.json</code> can be fetched.</p>'
+    );
   });
+})();
 </script>
 </body>
 </html>
