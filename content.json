@@ -10,11 +10,7 @@
     { "label": "Skills", "href": "#skills" },
     { "label": "Experience", "href": "#experience" },
     { "label": "Projects", "href": "#projects" },
-    { "label": "Contact", "href": "#contact" },
-    {
-      "label": "Portfolio",
-      "href": "assets/Shaun Ruddy Engineering Portfolio.pdf"
-    }
+    { "label": "Contact", "href": "#contact" }
   ],
   "hero": {
     "eyebrow": "Mechatronics · Robotics · AI",
@@ -205,6 +201,14 @@
           },
           {
             "src": "assets/Drone_2_Screenshot_2026-03-30_18-27-25.png",
+            "alt": "Electric UAV CAD with labeled subsystems"
+          },
+          {
+            "src": "assets/Drone_3_Screenshot_2026-03-30_18-27-43.png",
+            "alt": "Electric UAV CAD with labeled subsystems"
+          },
+          {
+            "src": "assets/Drone_4_Screenshot_2026-03-30_18-28-01.png",
             "alt": "Electric UAV CAD with labeled subsystems"
           }
         ],
