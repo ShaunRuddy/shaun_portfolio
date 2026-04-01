@@ -18,8 +18,8 @@
       "line1": "Shaun",
       "line2": "Ruddy"
     },
-    "subtitle": "Multidisciplinary engineer bridging mechanical design, embedded systems, and machine learning — building the next generation of intelligent robotic systems.",
-    "subtitleHtml": "Multidisciplinary engineer bridging <strong>mechanical design</strong>, <strong>embedded systems</strong>, and <strong>machine learning</strong> — building the next generation of intelligent robotic systems.",
+    "subtitle": "Multidisciplinary engineer bridging computer vision, mechanical design, embedded system communication, electronics, and artifical intelligence. Building the next generation of intelligent robotic systems.",
+    "subtitleHtml": "Multidisciplinary engineer bridging <strong>computer vision</strong>, <strong>mechanical design</strong>, <strong>embedded system communication</strong>, <strong>electronics</strong>, and <strong>artificial intelligence</strong>. Building the next generation of intelligent robotic systems.",
     "cta": [
       { "label": "View Projects", "href": "#projects", "style": "primary" },
       { "label": "Get in Touch", "href": "#contact", "style": "outline" },
@@ -66,9 +66,9 @@
     "headline": "Engineer by Training,\nBuilder by Nature",
     "paragraphsHtml": [
       "I hold a <strong>Master of Engineering in Robotics &amp; AI</strong> from the University of Toronto, alongside dual Bachelor's degrees in <strong>Mechanical Engineering</strong> and <strong>Computing Technology</strong> from the University of Ottawa.",
-      "Currently working as a <strong>Robotics Perception Engineer</strong> in Ossining, NY, I specialize in deploying multi-sensor software pipelines on embedded platforms like the NVIDIA Jetson Orin Nano, developing infrared processing algorithms, and pursuing SLAM and reinforcement learning research.",
-      "I've also developed a <strong>novel non-destructive testing system</strong> capable of detecting micron-scale fatigue cracks — work that has attracted interest from the U.S. Air Force.",
-      "Outside the lab, I've captained a competitive ultimate frisbee team to a provincial championship and was a provincial robotics tournament finalist."
+      "Currently working as a <strong>Robotics Perception Engineer</strong> for aRobotics Company, in Ossining, New York, I specialize in deploying multi-sensor software pipelines on embedded platforms. I've worked hands on with NVIDIA hardware such as the NVIDIA Jetson Orin Nano, and NVIDIA's A6000 RTX GPUs. Currently I am pursuing SLAM and reinforcement learning research.",
+      "I've also developed a <strong>novel non-destructive testing system</strong> capable of detecting micron-scale fatigue cracks utilizing infrared cameras - work that has attracted interest from the U.S. Air Force.",
+      "Outside the lab, I enjoy excercising and playing sports such as hockey and volleyball."
     ]
   },
   "education": [
@@ -97,7 +97,7 @@
     "groups": [
       {
         "title": "Languages & Frameworks",
-        "items": ["Python", "C++", "Java", "ROS2", "OOP"]
+        "items": ["Python", "C++", "Java", "ROS2", "MATLAB","French"]
       },
       {
         "title": "Machine Learning & AI",
@@ -109,25 +109,22 @@
           "Computer Vision",
           "Homography",
           "Stereo Vision",
-          "SLAM",
-          "Motion Planning"
+          "Pose Estimation"
         ]
       },
       {
         "title": "Embedded & Hardware",
-        "items": ["NVIDIA Jetson", "CAN", "SPI", "I2C", "Embedded Linux"]
+        "items": ["NVIDIA Jetson","Raspberry Pi", "Arduino" ,"CAN", "SPI", "I2C", "UART"]
       },
       {
         "title": "CAD & Design",
-        "items": ["SolidWorks", "Fusion 360", "DraftSight", "FEA", "DFAM"]
+        "items": ["SolidWorks", "Fusion 360", "DraftSight", "Topology Optimization", "DFAM"]
       },
       {
         "title": "Fabrication & Analysis",
         "items": [
           "3D Printing",
           "CNC Machining",
-          "MATLAB",
-          "Topology Opt.",
           "Soldering"
         ]
       }
