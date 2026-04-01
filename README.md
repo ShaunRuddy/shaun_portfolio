@@ -1,6 +1,6 @@
 # Engineering portfolio (static site)
 
-Single-page portfolio: `shaun_ruddy_portfolio.html`, `styles.css`, and `main.js` load copy and project data from **`content.json`**.
+Single-page portfolio: `index.html`, `styles.css`, and `main.js` load copy and project data from **`content.json`**.
 
 ## Editing content
 
