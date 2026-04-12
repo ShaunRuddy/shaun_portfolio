@@ -44,7 +44,7 @@
         "label": "Work Experience",
         "value": "3+ Years",
         "detail": [
-          "Robotics Perception Eng. — aRobotics (2025–Present)",
+          "Robotic Perception and AI Engineer — aRobotics (2025–Present)",
           "Additive Mfg. Intern — Equispheres (2023)",
           "Mechanical Intern — ICOR Technology (2019)"
         ]
@@ -52,7 +52,7 @@
       {
         "id": "currentRole",
         "label": "Current Title",
-        "value": "Robotics Perception Engineer",
+        "value": "Robotic Perception and AI Engineer",
         "detail": [
           "aRobotics Company · Ossining, NY",
           "Multi-sensor pipelines · Embedded perception",
@@ -66,7 +66,7 @@
     "headline": "Engineer by Training,\nBuilder by Nature",
     "paragraphsHtml": [
       "I hold a <strong>Master of Engineering in Robotics &amp; AI</strong> from the University of Toronto, alongside dual Bachelor's degrees in <strong>Mechanical Engineering</strong> and <strong>Computing Technology</strong> from the University of Ottawa.",
-      "Currently working as a <strong>Robotics Perception Engineer</strong> for aRobotics Company, in Ossining, New York, I specialize in deploying multi-sensor software pipelines on embedded platforms. I've worked hands on with NVIDIA hardware such as the NVIDIA Jetson Orin Nano, and NVIDIA's A6000 RTX GPUs. Currently I am pursuing SLAM and reinforcement learning research.",
+      "Currently working as a <strong>Robotic Perception and AI Engineer</strong> for aRobotics Company, in Ossining, New York, I specialize in deploying multi-sensor software pipelines on embedded platforms. I've worked hands on with NVIDIA hardware such as the NVIDIA Jetson Orin Nano, and NVIDIA's A6000 RTX GPUs. Currently I am pursuing SLAM and reinforcement learning research.",
       "I've also developed a <strong>novel non-destructive testing system</strong> capable of detecting micron-scale fatigue cracks utilizing infrared cameras - work that has attracted interest from the U.S. Air Force.",
       "Outside the lab, I enjoy excercising and playing sports such as hockey and volleyball."
     ]
@@ -138,7 +138,7 @@
         "dateRange": "Sept 2025 – Present",
         "company": "aRobotics Company",
         "location": "Ossining, NY",
-        "title": "Robotics Perception Engineer",
+        "title": "Robotic Perception and AI Engineer",
         "bullets": [
           "Deployed multi-sensor software pipeline on NVIDIA Jetson Orin Nano, designing embedded communication structure (CAN, SPI, I2C) and integrating low-level firmware in Python and C++.",
           "Developed performance-critical infrared processing algorithms including flat-field correction and advanced noise mitigation.",
@@ -335,6 +335,6 @@
   },
   "footer": {
     "name": "Shaun Ruddy",
-    "credentials": "MEng · BEng · BSc · Robotics Perception Engineer"
+    "credentials": "MEng · BEng · BSc · Robotic Perception and AI Engineer"
   }
 }
